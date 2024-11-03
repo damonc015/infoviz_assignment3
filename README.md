@@ -13,3 +13,6 @@ Visualizes the historical trends of minimum wage across different US states, com
 npm install
 npm run dev
 ```
+
+## To view online
+[infoviz-assignment.vercel.app](https://infoviz-assignment.vercel.app)
