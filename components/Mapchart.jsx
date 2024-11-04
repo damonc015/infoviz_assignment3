@@ -82,7 +82,7 @@ const Mapchart = ({statesData, selectedStates, setSelectedStates}) => {
         g.selectAll('.state-label').remove();
       })
       .on('click', function(event, data) {
-        console.log(data);
+        // console.log(data);
         const stateName = data.properties.NAME;
         const isSelected = selectedStates.includes(stateName);
         

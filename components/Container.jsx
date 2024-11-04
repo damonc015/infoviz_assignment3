@@ -39,7 +39,6 @@ const Container = () => {
               data
             }))
             .filter(state => state.state !== 'District of Columbia' && state.state !== 'Puerto Rico');
-            console.log(stateWageData);
             setWageData(stateWageData);
           })
           .catch(error => console.error('Error loading the data:', error));

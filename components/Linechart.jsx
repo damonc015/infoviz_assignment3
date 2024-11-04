@@ -6,11 +6,9 @@ const LineChart = ({ wageData, selectedStates, fedWage, setSelectedStates }) => 
   const svgRef = useRef();
   const [normOr2020, setNormOr2020] = useState(true);
 
-  useEffect(() => {
-    console.log("wageData in LineChart:", wageData);
-    console.log("selectedStates in LineChart:", selectedStates);
-    console.log("fedWage in LineChart:", fedWage);
-  }, [wageData, selectedStates, fedWage]);
+  // useEffect(() => {
+  //   console.log("selectedStates in LineChart:", selectedStates);
+  // }, [wageData, selectedStates, fedWage]);
 
   useEffect(() => {
     if (!fedWage || Object.keys(fedWage).length === 0) return;
