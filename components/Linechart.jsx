@@ -2,13 +2,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import * as d3 from 'd3';
 
-const LineChart = ({ wageData, selectedStates, fedWage, setSelectedStates }) => {
+const LineChart = ({ wageData, selectedStates, fedWage, setSelectedStates}) => {
   const svgRef = useRef();
   const [normOr2020, setNormOr2020] = useState(true);
-
-  // useEffect(() => {
-  //   console.log("selectedStates in LineChart:", selectedStates);
-  // }, [wageData, selectedStates, fedWage]);
 
   useEffect(() => {
     if (!fedWage || Object.keys(fedWage).length === 0) return;

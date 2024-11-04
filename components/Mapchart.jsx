@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import * as d3 from 'd3'
 
 
@@ -54,8 +54,9 @@ const Mapchart = ({statesData, selectedStates, setSelectedStates}) => {
       .style('fill', d => selectedStates.includes(d.properties.NAME) ? '#4CAF50' : '#ccc')
       .on('mouseover', function(event, d){
           const element = d3.select(this);
+          const currentColor = element.style('fill');
           
-          if (!selectedStates.includes(d.properties.NAME)) {
+          if (currentColor === 'rgb(204, 204, 204)') { // #ccc in RGB
             element.style('fill', '#999')
                    .style('opacity', 0.8);
           }
@@ -74,28 +75,36 @@ const Mapchart = ({statesData, selectedStates, setSelectedStates}) => {
       })
       .on('mouseout', function(event, d) {
         const element = d3.select(this);
+        const currentColor = element.style('fill');
         
-        if (!selectedStates.includes(d.properties.NAME)) {
+        if (currentColor === 'rgb(153, 153, 153)') { // #999 in RGB
           element.style('fill', '#ccc');
         }
         element.style('opacity', 1);
         g.selectAll('.state-label').remove();
       })
       .on('click', function(event, data) {
-        // console.log(data);
         const stateName = data.properties.NAME;
-        const isSelected = selectedStates.includes(stateName);
+        const element = d3.select(this);
+        const currentColor = element.style('fill');
         
-        if (isSelected) {
+        if (currentColor === 'rgb(76, 175, 80)') { // #4CAF50 in RGB
+          element.style('fill', '#ccc');
           setSelectedStates(prev => prev.filter(state => state !== stateName));
-          d3.select(this).style('fill', '#ccc');
         } else {
+          element.style('fill', '#4CAF50');
           setSelectedStates(prev => [...prev, stateName]);
-          d3.select(this).style('fill', '#4CAF50');
-        }
+        } 
       })
+  }, [statesData])
 
-  }, [statesData, selectedStates])
+  useEffect(() => {
+    const svg = d3.select(svgRef.current);
+    svg.selectAll('path')
+      .style('fill', function(d) {
+        return selectedStates.includes(d.properties.NAME) ? '#4CAF50' : '#ccc';
+      });
+  }, [selectedStates]);
 
   return (
     <div className='container'>
